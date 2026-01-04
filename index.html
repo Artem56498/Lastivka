@@ -223,7 +223,192 @@
     .action-btn:hover {
         color: var(--primary);
     }
+</style>
+</head>
+<body>
 
+<header>
+    <h1>ЗДО «Садочок Ластівка»</h1>
+    <p>Офіційний сайт дитячого садка</p>
+    <div class="header-buttons">
+        <button class="header-btn" id="educatorLoginBtn">Вхід для вихователів</button>
+        <button class="header-btn" id="adminLoginBtn">Вхід для адміністратора</button>
+    </div>
+</header>
+<nav>
+    <button class="nav-btn active" data-tab="home">Головна</button>
+    <button class="nav-btn" data-tab="news">Новини</button>
+    <button class="nav-btn" data-tab="album">Фотоальбом</button>
+    <button class="nav-btn" data-tab="groups">Групи</button>
+    <button class="nav-btn" data-tab="schedule">Розклад</button>
+    <button class="nav-btn" data-tab="collective">Педколектив</button>
+    <button class="nav-btn" data-tab="inclusive">Інклюзія</button>
+    <button class="nav-btn" data-tab="statut">Статут</button>
+    <button class="nav-btn" data-tab="orders">Накази</button>
+    <button class="nav-btn educator hidden" data-tab="educator">Для вихователів</button>
+    <button class="nav-btn admin hidden" data-tab="admin">Адмін-панель</button>
+</nav>
+
+<div class="container">
+    <!-- Вкладки -->
+    <div id="home" class="section active">
+        <div class="card">
+            <h2>Ласкаво просимо!</h2>
+            <p>Ми раді вітати вас на офіційному сайті закладу дошкільної освіти «Садочок Ластівка». Тут ви знайдете всю необхідну інформацію про наш садочок, новини, розклад, фото та документи.</p>
+            <p>Наші цілі — гармонійний розвиток дітей, створення затишного середовища та підтримка батьків у вихованні.</p>
+        </div>
+        <div class="card">
+            <h2>Останні новини</h2>
+            <div id="newsFeed"></div>
+        </div>
+    </div>
+
+    <div id="news" class="section">
+        <div class="card">
+            <h2>Новини та оголошення</h2>
+            <div id="newsContent"></div>
+            <div id="newsPosts"></div>
+        </div>
+    </div>
+
+    <div id="album" class="section">
+        <div class="card">
+            <h2>Фотоальбом</h2>
+            <div id="albumContent"></div>
+        </div>
+    </div>
+
+    <div id="groups" class="section">
+        <div class="card">
+            <h2>Групи нашого садочка</h2>
+            <select id="groupSelect">
+                <option value="BDZ">🍯 Бджілки</option>
+                <option value="VES">🌈 Веселка</option>
+                <option value="ZIRO">⭐ Зірочки</option>
+                <option value="KRAP">💧 Краплинки</option>
+                <option value="PIZ">🔍 Пізнайко</option>
+                <option value="SONE">☀️ Сонечко</option>
+                <option value="CHOM">❓ Чомусики</option>
+                <option value="SONY">🌻 Соняшник</option>
+            </select>
+            <div id="groupContent"></div>
+        </div>
+    </div>
+
+    <div id="schedule" class="section">
+        <div class="card">
+            <h2>Розклад занять</h2>
+            <div id="scheduleContent"></div>
+        </div>
+    </div>
+
+    <div id="collective" class="section">
+        <div class="card">
+            <h2>Педагогічний колектив</h2>
+            <div id="collectiveContent"></div>
+        </div>
+    </div>
+
+    <div id="inclusive" class="section">
+        <div class="card">
+            <h2>Інклюзивна освіта</h2>
+            <div id="inclusiveContent"></div>
+        </div>
+    </div>
+
+    <div id="statut" class="section">
+        <div class="card">
+            <h2>Статут закладу</h2>
+            <div id="statutContent"></div>
+        </div>
+    </div>
+
+    <div id="orders" class="section">
+        <div class="card">
+            <h2>Накази та розпорядження</h2>
+            <div id="ordersContent"></div>
+        </div>
+    </div>
+        <div id="educator" class="section">
+        <div class="card">
+            <h2>Спілкування для вихователів</h2>
+            <div id="educatorPosts"></div>
+            <div class="comment-form" id="educatorCommentForm">
+                <div class="form-group">
+                    <label class="form-label">Додати коментар:</label>
+                    <textarea class="form-textarea" id="educatorComment" placeholder="Напишіть ваш коментар..."></textarea>
+                </div>
+                <button class="form-btn" id="addCommentBtn">Опублікувати коментар</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin" class="section">
+        <div class="card">
+            <h2>Адміністративна панель</h2>
+            
+            <div class="new-post-form">
+                <h3>Створити нову новину</h3>
+                <div class="form-group">
+                    <label class="form-label">Заголовок:</label>
+                    <input type="text" class="form-input" id="postTitle" placeholder="Введіть заголовок новини">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Текст новини:</label>
+                    <textarea class="form-textarea" id="postContent" placeholder="Введіть текст новини..."></textarea>
+                </div>
+                <button class="form-btn" id="createPostBtn">Опублікувати новину</button>
+            </div>
+
+            <div class="new-post-form" style="margin-top: 2rem;">
+                <h3>Керування контентом</h3>
+                <button class="form-btn" id="clearPostsBtn" style="background: #dc3545; margin-right: 10px;">Видалити всі новини</button>
+                <button class="form-btn" id="refreshPostsBtn">Оновити список</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 ЗДО «Садочок Ластівка». Усі права захищено.</p>
+    <p style="opacity:0.8; font-size:0.9rem;">Офіційний сайт закладу дошкільної освіти</p>
+</footer>
+<!-- Модальне вікно входу для адміністратора -->
+<div id="adminLoginModal" class="modal">
+    <div class="modal-content">
+        <h3>Вхід для адміністратора</h3>
+        <input id="adminInput" class="modal-input" placeholder="Введіть email адміністратора" type="email">
+        <button class="modal-btn" id="adminLoginSubmitBtn">Увійти</button>
+        <p style="margin-top:15px; font-size:0.9rem; color:var(--medium-gray);">Адміністратор: lisovectana370@gmail.com</p>
+    </div>
+</div>
+
+<!-- Модальне вікно входу для вихователів -->
+<div id="educatorLoginModal" class="modal">
+    <div class="modal-content">
+        <h3>Вхід для вихователів</h3>
+        <div class="form-group">
+            <label class="form-label">Ваше ім'я:</label>
+            <input id="educatorName" class="modal-input" placeholder="Введіть ваше ім'я">
+        </div>
+        <div class="form-group">
+            <label class="form-label">Група:</label>
+            <select id="educatorGroupSelect" class="modal-input">
+                <option value="Бджілки">🍯 Бджілки</option>
+                <option value="Веселка">🌈 Веселка</option>
+                <option value="Зірочки">⭐ Зірочки</option>
+                <option value="Краплинки">💧 Краплинки</option>
+                <option value="Пізнайко">🔍 Пізнайко</option>
+                <option value="Сонечко">☀️ Сонечко</option>
+                <option value="Чомусики">❓ Чомусики</option>
+                <option value="Соняшник">🌻 Соняшник</option>
+            </select>
+        </div>
+        <button class="modal-btn" id="educatorLoginSubmitBtn">Увійти</button>
+    </div>
+</div>
+
+<style>
     .comment-section {
         margin-top: 1.5rem;
         padding-top: 1.5rem;
@@ -462,198 +647,13 @@
         }
     }
 </style>
-</head>
-<body>
-
-<header>
-    <h1>ЗДО «Садочок Ластівка»</h1>
-    <p>Офіційний сайт дитячого садка</p>
-    <div class="header-buttons">
-        <button class="header-btn" onclick="openEducatorLogin()">Вхід для вихователів</button>
-        <button class="header-btn" onclick="openAdminLogin()">Вхід для адміністратора</button>
-    </div>
-</header>
-
-<nav>
-    <button class="nav-btn active" onclick="openTab(event, 'home')">Головна</button>
-    <button class="nav-btn" onclick="openTab(event, 'news')">Новини</button>
-    <button class="nav-btn" onclick="openTab(event, 'album')">Фотоальбом</button>
-    <button class="nav-btn" onclick="openTab(event, 'groups')">Групи</button>
-    <button class="nav-btn" onclick="openTab(event, 'schedule')">Розклад</button>
-    <button class="nav-btn" onclick="openTab(event, 'collective')">Педколектив</button>
-    <button class="nav-btn" onclick="openTab(event, 'inclusive')">Інклюзія</button>
-    <button class="nav-btn" onclick="openTab(event, 'statut')">Статут</button>
-    <button class="nav-btn" onclick="openTab(event, 'orders')">Накази</button>
-    <button class="nav-btn educator hidden" onclick="openTab(event, 'educator')">Для вихователів</button>
-    <button class="nav-btn admin hidden" onclick="openTab(event, 'admin')">Адмін-панель</button>
-</nav>
-
-<div class="container">
-    <!-- Вкладки -->
-    <div id="home" class="section active">
-        <div class="card">
-            <h2>Ласкаво просимо!</h2>
-            <p>Ми раді вітати вас на офіційному сайті закладу дошкільної освіти «Садочок Ластівка». Тут ви знайдете всю необхідну інформацію про наш садочок, новини, розклад, фото та документи.</p>
-            <p>Наші цілі — гармонійний розвиток дітей, створення затишного середовища та підтримка батьків у вихованні.</p>
-        </div>
-        <div class="card">
-            <h2>Останні новини</h2>
-            <div id="newsFeed"></div>
-        </div>
-    </div>
-
-    <div id="news" class="section">
-        <div class="card">
-            <h2>Новини та оголошення</h2>
-            <div id="newsContent"></div>
-            <div id="newsPosts"></div>
-        </div>
-    </div>
-
-    <div id="album" class="section">
-        <div class="card">
-            <h2>Фотоальбом</h2>
-            <div id="albumContent"></div>
-        </div>
-    </div>
-
-    <div id="groups" class="section">
-        <div class="card">
-            <h2>Групи нашого садочка</h2>
-            <select onchange="loadGroup(this.value)">
-                <option value="BDZ">🍯 Бджілки</option>
-                <option value="VES">🌈 Веселка</option>
-                <option value="ZIRO">⭐ Зірочки</option>
-                <option value="KRAP">💧 Краплинки</option>
-                <option value="PIZ">🔍 Пізнайко</option>
-                <option value="SONE">☀️ Сонечко</option>
-                <option value="CHOM">❓ Чомусики</option>
-                <option value="SONY">🌻 Соняшник</option>
-            </select>
-            <div id="groupContent"></div>
-        </div>
-    </div>
-
-    <div id="schedule" class="section">
-        <div class="card">
-            <h2>Розклад занять</h2>
-            <div id="scheduleContent"></div>
-        </div>
-    </div>
-
-    <div id="collective" class="section">
-        <div class="card">
-            <h2>Педагогічний колектив</h2>
-            <div id="collectiveContent"></div>
-        </div>
-    </div>
-
-    <div id="inclusive" class="section">
-        <div class="card">
-            <h2>Інклюзивна освіта</h2>
-            <div id="inclusiveContent"></div>
-        </div>
-    </div>
-
-    <div id="statut" class="section">
-        <div class="card">
-            <h2>Статут закладу</h2>
-            <div id="statutContent"></div>
-        </div>
-    </div>
-
-    <div id="orders" class="section">
-        <div class="card">
-            <h2>Накази та розпорядження</h2>
-            <div id="ordersContent"></div>
-        </div>
-    </div>
-
-    <div id="educator" class="section">
-        <div class="card">
-            <h2>Спілкування для вихователів</h2>
-            <div id="educatorPosts"></div>
-            <div class="comment-form" id="educatorCommentForm">
-                <div class="form-group">
-                    <label class="form-label">Додати коментар:</label>
-                    <textarea class="form-textarea" id="educatorComment" placeholder="Напишіть ваш коментар..."></textarea>
-                </div>
-                <button class="form-btn" onclick="addEducatorComment()">Опублікувати коментар</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="admin" class="section">
-        <div class="card">
-            <h2>Адміністративна панель</h2>
-            
-            <div class="new-post-form">
-                <h3>Створити нову новину</h3>
-                <div class="form-group">
-                    <label class="form-label">Заголовок:</label>
-                    <input type="text" class="form-input" id="postTitle" placeholder="Введіть заголовок новини">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Текст новини:</label>
-                    <textarea class="form-textarea" id="postContent" placeholder="Введіть текст новини..."></textarea>
-                </div>
-                <button class="form-btn" onclick="createPost()">Опублікувати новину</button>
-            </div>
-
-            <div class="new-post-form" style="margin-top: 2rem;">
-                <h3>Керування контентом</h3>
-                <button class="form-btn" onclick="clearAllPosts()" style="background: #dc3545; margin-right: 10px;">Видалити всі новини</button>
-                <button class="form-btn" onclick="loadAllPosts()">Оновити список</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<footer>
-    <p>© 2023 ЗДО «Садочок Ластівка». Усі права захищено.</p>
-    <p style="opacity:0.8; font-size:0.9rem;">Офіційний сайт закладу дошкільної освіти</p>
-</footer>
-
-<!-- Модальне вікно входу для адміністратора -->
-<div id="adminLogin" class="modal">
-    <div class="modal-content">
-        <h3>Вхід для адміністратора</h3>
-        <input id="adminInput" class="modal-input" placeholder="Введіть email адміністратора" type="email">
-        <button class="modal-btn" onclick="adminLogin()">Увійти</button>
-        <p style="margin-top:15px; font-size:0.9rem; color:var(--medium-gray);">Адміністратор: lisovectana370@gmail.com</p>
-    </div>
-</div>
-
-<!-- Модальне вікно входу для вихователів -->
-<div id="educatorLogin" class="modal">
-    <div class="modal-content">
-        <h3>Вхід для вихователів</h3>
-        <div class="form-group">
-            <label class="form-label">Ваше ім'я:</label>
-            <input id="educatorName" class="modal-input" placeholder="Введіть ваше ім'я">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Група:</label>
-            <select id="educatorGroup" class="modal-input">
-                <option value="Бджілки">🍯 Бджілки</option>
-                <option value="Веселка">🌈 Веселка</option>
-                <option value="Зірочки">⭐ Зірочки</option>
-                <option value="Краплинки">💧 Краплинки</option>
-                <option value="Пізнайко">🔍 Пізнайко</option>
-                <option value="Сонечко">☀️ Сонечко</option>
-                <option value="Чомусики">❓ Чомусики</option>
-                <option value="Соняшник">🌻 Соняшник</option>
-            </select>
-        </div>
-        <button class="modal-btn" onclick="educatorLogin()">Увійти</button>
-    </div>
-</div>
-
 <script>
+    // Глобальні змінні
     let currentUser = null;
     let isAdmin = false;
     let isEducator = false;
     
+    // Папки Google Drive
     const folders = {
         "news":"1zooffQ541chkyuKTUul2nkPjJDwirvxQ",
         "album":"1IknDuijQtf-RrgZ8PtK89K1W2_tWz6xU",
@@ -672,14 +672,385 @@
         "SONY":"1cjb4QtNFRAcVbNB62YaHsp0n8L4r8wzg"
     };
 
-    // Пости та коментарі (в реальному застосунку буде зберігатися на сервері)
+    // Пости та коментарі
     let posts = JSON.parse(localStorage.getItem('sadocok_posts')) || [];
     let educatorComments = JSON.parse(localStorage.getItem('sadocok_educator_comments')) || [];
 
-    function openTab(event, id) {
+    // Функція для перемикання вкладок
+    function openTab(tabId) {
         // Приховуємо всі вкладки
         document.querySelectorAll('.section').forEach(s => {
             s.classList.remove('active');
         });
         
-  
+        // Видаляємо активний клас у всіх кнопок
+        document.querySelectorAll('.nav-btn').forEach(b => {
+            b.classList.remove('active');
+        });
+        
+        // Показуємо обрану вкладку
+        const tabElement = document.getElementById(tabId);
+        if (tabElement) {
+            tabElement.classList.add('active');
+        }
+        
+        // Активуємо відповідну кнопку
+        const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
+        if (activeButton) {
+            activeButton.classList.add('active');
+        }
+        
+        // Оновлюємо вміст вкладок при необхідності
+        if (tabId === 'news') {
+            loadNewsPosts();
+        } else if (tabId === 'educator') {
+            loadEducatorComments();
+        }
+    }
+
+    // Ініціалізація при завантаженні
+    document.addEventListener('DOMContentLoaded', function() {
+        // Додаємо обробники подій для кнопок навігації
+        document.querySelectorAll('.nav-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                if (tabId) {
+                    openTab(tabId);
+                }
+            });
+        });
+        
+        // Кнопки входу
+        document.getElementById('educatorLoginBtn').addEventListener('click', function() {
+            document.getElementById('educatorLoginModal').style.display = 'flex';
+        });
+        
+        document.getElementById('adminLoginBtn').addEventListener('click', function() {
+            document.getElementById('adminLoginModal').style.display = 'flex';
+        });
+        
+        // Кнопки модальних вікон
+        document.getElementById('adminLoginSubmitBtn').addEventListener('click', adminLogin);
+        document.getElementById('educatorLoginSubmitBtn').addEventListener('click', educatorLogin);
+        
+        // Селект груп
+        document.getElementById('groupSelect').addEventListener('change', function() {
+            loadGroup(this.value);
+        });
+        
+        // Кнопки адмін-панелі
+        document.getElementById('createPostBtn').addEventListener('click', createPost);
+        document.getElementById('clearPostsBtn').addEventListener('click', clearAllPosts);
+        document.getElementById('refreshPostsBtn').addEventListener('click', loadAllPosts);
+        
+        // Кнопка додавання коментаря
+        document.getElementById('addCommentBtn').addEventListener('click', addEducatorComment);
+            // Завантажуємо посилання на Google Drive
+    Object.keys(folders).forEach(f => {
+        if (!["BDZ","VES","ZIRO","KRAP","PIZ","SONE","CHOM","SONY"].includes(f)) {
+            loadFolder(f);
+        }
+    });
+    
+    // Завантажуємо першу групу за замовчуванням
+    loadGroup("BDZ");
+    loadNewsFeed();
+    
+    // Завантажуємо пости новин при завантаженні
+    loadNewsPosts();
+    
+    // Закриття модальних вікон при кліку поза ними
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+    });
+});
+
+// Функції входу
+function adminLogin() {
+    let input = document.getElementById('adminInput').value.trim();
+    if (input === "lisovectana370@gmail.com") {
+        currentUser = { name: "Адміністратор", role: "admin" };
+        isAdmin = true;
+        isEducator = false;
+        
+        document.querySelectorAll('.admin').forEach(e => e.classList.remove('hidden'));
+        document.querySelectorAll('.educator').forEach(e => e.classList.add('hidden'));
+        
+        document.getElementById('adminLoginModal').style.display = 'none';
+        alert("Вітаємо, адміністраторе!");
+        openTab('admin');
+    } else {
+        alert("Невірний email адміністратора.");
+    }
+}
+
+function educatorLogin() {
+    let name = document.getElementById('educatorName').value.trim();
+    let group = document.getElementById('educatorGroupSelect').value;
+    
+    if (!name) {
+        alert("Будь ласка, введіть ваше ім'я.");
+        return;
+    }
+    
+    currentUser = { 
+        name: name, 
+        role: "educator",
+        group: group
+    };
+    isAdmin = false;
+    isEducator = true;
+    
+    document.querySelectorAll('.educator').forEach(e => e.classList.remove('hidden'));
+    document.querySelectorAll('.admin').forEach(e => e.classList.add('hidden'));
+    
+    document.getElementById('educatorLoginModal').style.display = 'none';
+    alert(`Вітаємо, ${name} (група "${group}")!`);
+    openTab('educator');
+}
+
+// Функції для роботи з постами
+function createPost() {
+    if (!isAdmin) {
+        alert("Тільки адміністратор може публікувати новини.");
+        return;
+    }
+    
+    let title = document.getElementById('postTitle').value.trim();
+    let content = document.getElementById('postContent').value.trim();
+    
+    if (!title || !content) {
+        alert("Будь ласка, заповніть заголовок та текст новини.");
+        return;
+    }
+    
+    const newPost = {
+        id: Date.now(),
+        title: title,
+        content: content,
+        author: "Адміністратор",
+        date: new Date().toLocaleDateString('uk-UA', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        }),
+        type: 'news',
+        comments: []
+    };
+    
+    posts.unshift(newPost);
+    savePosts();
+    
+    document.getElementById('postTitle').value = '';
+    document.getElementById('postContent').value = '';
+    
+    loadNewsPosts();
+    loadNewsFeed();
+    
+    alert("Новину успішно опубліковано!");
+    }
+    function loadNewsPosts() {
+    const container = document.getElementById('newsPosts');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (posts.length === 0) {
+        container.innerHTML = '<p>Поки що немає новин. Будьте першими!</p>';
+        return;
+    }
+    
+    posts.forEach(post => {
+        if (post.type === 'news') {
+            const postElement = document.createElement('div');
+            postElement.className = 'post admin-post';
+            postElement.innerHTML = `
+                <div class="post-header">
+                    <div class="post-author">${post.author}</div>
+                    <div class="post-date">${post.date}</div>
+                </div>
+                <h3>${post.title}</h3>
+                <div class="post-content">${post.content}</div>
+                ${isAdmin ? `
+                <div class="post-actions">
+                    <button class="action-btn" onclick="deletePost(${post.id})">
+                        <span>🗑️ Видалити</span>
+                    </button>
+                </div>
+                ` : ''}
+            `;
+            container.appendChild(postElement);
+        }
+    });
+}
+
+function loadNewsFeed() {
+    const container = document.getElementById('newsFeed');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    const recentPosts = posts.filter(post => post.type === 'news').slice(0, 3);
+    
+    if (recentPosts.length === 0) {
+        container.innerHTML = '<p>Останніх новин поки що немає.</p>';
+        return;
+    }
+    
+    recentPosts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
+        postElement.innerHTML = `
+            <div class="post-header">
+                <div class="post-author">${post.author}</div>
+                <div class="post-date">${post.date}</div>
+            </div>
+            <h3>${post.title}</h3>
+            <div class="post-content">${post.content}</div>
+        `;
+        container.appendChild(postElement);
+    });
+}
+
+function loadEducatorComments() {
+    const container = document.getElementById('educatorPosts');
+    if (!container || !isEducator) return;
+    
+    container.innerHTML = '';
+    
+    if (educatorComments.length === 0) {
+        container.innerHTML = '<p>Поки що немає коментарів. Будьте першими!</p>';
+        return;
+    }
+    
+    educatorComments.forEach(comment => {
+        const commentElement = document.createElement('div');
+        commentElement.className = 'post';
+        commentElement.innerHTML = `
+            <div class="post-header">
+                <div class="post-author">${comment.author} (${comment.group})</div>
+                <div class="post-date">${comment.date}</div>
+            </div>
+            <div class="post-content">${comment.content}</div>
+        `;
+        container.appendChild(commentElement);
+    });
+}
+
+function addEducatorComment() {
+    if (!isEducator) {
+        alert("Тільки авторизовані вихователі можуть додавати коментарі.");
+        return;
+    }
+    
+    let content = document.getElementById('educatorComment').value.trim();
+    
+    if (!content) {
+        alert("Будь ласка, введіть текст коментаря.");
+        return;
+    }
+    
+    const newComment = {
+        id: Date.now(),
+        author: currentUser.name,
+        group: currentUser.group,
+        content: content,
+        date: new Date().toLocaleDateString('uk-UA', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        })
+    };
+    
+    educatorComments.unshift(newComment);
+    saveEducatorComments();
+    
+    document.getElementById('educatorComment').value = '';
+    loadEducatorComments();
+    
+    alert("Коментар успішно додано!");
+    }
+        function deletePost(postId) {
+        if (!isAdmin) return;
+        
+        if (confirm("Ви впевнені, що хочете видалити цю новину?")) {
+            posts = posts.filter(post => post.id !== postId);
+            savePosts();
+            loadNewsPosts();
+            loadNewsFeed();
+        }
+    }
+
+    function clearAllPosts() {
+        if (!isAdmin) return;
+        
+        if (confirm("Ви дійсно хочете видалити ВСІ новини? Цю дію неможливо скасувати.")) {
+            posts = posts.filter(post => post.type !== 'news');
+            savePosts();
+            loadNewsPosts();
+            loadNewsFeed();
+            alert("Всі новини видалено.");
+        }
+    }
+
+    function loadAllPosts() {
+        if (!isAdmin) return;
+        loadNewsPosts();
+        alert("Список новин оновлено.");
+    }
+
+    function savePosts() {
+        localStorage.setItem('sadocok_posts', JSON.stringify(posts));
+    }
+
+    function saveEducatorComments() {
+        localStorage.setItem('sadocok_educator_comments', JSON.stringify(educatorComments));
+    }
+
+    function loadGroup(key) {
+        const el = document.getElementById('groupContent');
+        const groupNames = {
+            "BDZ": "Бджілки",
+            "VES": "Веселка",
+            "ZIRO": "Зірочки",
+            "KRAP": "Краплинки",
+            "PIZ": "Пізнайко",
+            "SONE": "Сонечко",
+            "CHOM": "Чомусики",
+            "SONY": "Соняшник"
+        };
+        el.innerHTML = `
+            <a class="drive-link" href="https://drive.google.com/drive/folders/${folders[key]}" target="_blank">
+                📂 Відкрити папку групи "${groupNames[key]}"
+            </a>`;
+    }
+
+    function loadFolder(tab) {
+        const el = document.getElementById(tab + "Content");
+        const tabNames = {
+            "news": "Новини",
+            "album": "Фотоальбом",
+            "schedule": "Розклад",
+            "collective": "Педколектив",
+            "inclusive": "Інклюзія",
+            "statut": "Статут",
+            "orders": "Накази"
+        };
+        if (el) {
+            el.innerHTML = `
+                <a class="drive-link" href="https://drive.google.com/drive/folders/${folders[tab]}" target="_blank">
+                    📁 Відкрити папку "${tabNames[tab]}"
+                </a>`;
+        }
+    }
+</script>
+</body>
+</html>
